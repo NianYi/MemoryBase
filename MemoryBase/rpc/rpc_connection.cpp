@@ -1,3 +1,9 @@
+/*
+Author : manuelyuan
+Desc : important component of RPC, include two type:
+    1. point RpcConnection used to connect other progress and remote call;
+    2. sock RpcConnection used to be connected and be remote called by other progress;
+*/
 #include "../include/mutex.hpp"
 #include "../network/poller.hpp"
 
@@ -8,10 +14,12 @@
 namespace MemoryBase{
 uint32_t RpcConnection::RpcId = 0;
 RpcConnection::RpcConnection(const EndPont &poin, Poller *poll):Connection(poin, poll), disable(0), mar(input, output){
-
+    readrc = []{
+        //receive response - handle
+    };
 }
 RpcConnection::RpcConnection(const Socket &sock, Poller *poll):Connection(poin, poll), disable(0), mar(input, output){
-
+    //receive rpc request
 }
 template<typename T1, typename T2>
 void RpcConnection::Call(const char *str, const T2 *args, Future<T2> *fu){
@@ -25,4 +33,5 @@ void RpcConnection::Call(const char *str, const T2 *args, Future<T2> *fu){
 	}
 
 }
+
 }//namespace MemoryBase
