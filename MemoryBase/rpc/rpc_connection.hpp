@@ -10,9 +10,10 @@ namespace MemoryBase{
 class Marshaller;
 class Poller;
 class Mutex;
+class atomic_32_t;
 class RpcConnection : public Connection{
 public:
-	static int RpcId;
+	static atomic_32_t RpcId;
 	RpcConnection(const EndPoint &poin, Poller *poll);
 	RpcConnection(const Socket &sock, Poller *poll);
 	template<typename T1, typename T2>
